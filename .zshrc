@@ -129,9 +129,7 @@ alias Tls="tmux list-sessions"
 alias Tks="tmux kill-session -t"
 alias Thelp="bat /home/ian/.tmux/tmux-shortcuts.md"
 
-# Function for Ollama on port 11434
-
-# Git Add main files
+# Git add dot and conf files to repo
 alias Gz="git_commit_dot_and_conf_files"
 
 git_commit_dot_and_conf_files() {
@@ -142,7 +140,7 @@ git_commit_dot_and_conf_files() {
   git push -u origin main
 }
 
-
+# Function for Ollama on port 11434
 ollama_11434() {
   OLLAMA_HOST=127.0.0.1:11434 ollama "$@"
 }
