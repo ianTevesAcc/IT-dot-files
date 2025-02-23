@@ -130,6 +130,19 @@ alias Tks="tmux kill-session -t"
 alias Thelp="bat /home/ian/.tmux/tmux-shortcuts.md"
 
 # Function for Ollama on port 11434
+
+# Git Add main files
+alias Gz="git_commit_dot_and_conf_files"
+
+git_commit_dot_and_conf_files() {
+  cd ~/
+  local datetime=$(TZ="Pacific/Auckland" date +"%Y-%m-%d %H:%M:%S")
+  git add ~/.fzf.zsh ~/.p10k.zsh ~/.tmux.conf ~/.zshrc ~/README.md ~/.config/lazygit/ ~/.config/nvim/ ~/.config/neofetch
+  git commit -m "$datetime"
+  git push -u origin main
+}
+
+
 ollama_11434() {
   OLLAMA_HOST=127.0.0.1:11434 ollama "$@"
 }
