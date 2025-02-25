@@ -135,7 +135,7 @@ alias Gz="git_commit_dot_and_conf_files"
 git_commit_dot_and_conf_files() {
   cd ~/
   local datetime=$(TZ="Pacific/Auckland" date +"%Y-%m-%d %H:%M:%S")
-  git add ~/.fzf.zsh ~/.p10k.zsh ~/.tmux.conf ~/.zshrc ~/README.md ~/.config/lazygit/ ~/.config/nvim/ ~/.config/neofetch
+  git add ~/.fzf.zsh ~/.p10k.zsh ~/.tmux.conf ~/.zshrc ~/README.md ~/.config/lazygit ~/.config/nvim ~/.config/neofetch
   git commit -m "$datetime"
   git push -u origin main
 }
