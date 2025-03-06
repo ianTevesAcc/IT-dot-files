@@ -130,12 +130,34 @@ alias Tks="tmux kill-session -t"
 alias Thelp="bat /home/ian/.tmux/tmux-shortcuts.md"
 
 # Git add dot and conf files to repo
-alias Gz="git_commit_dot_and_conf_files"
+alias Ga="git_commit_dot_and_conf_files"
+alias Gz="git_commit_dot_files"
+alias Gn="git_commit_nvim"
 
 git_commit_dot_and_conf_files() {
   cd ~/
   local datetime=$(TZ="Pacific/Auckland" date +"%Y-%m-%d %H:%M:%S")
-  git add ~/.fzf.zsh ~/.p10k.zsh ~/.tmux.conf ~/.zshrc ~/README.md ~/.config/lazygit ~/.config/nvim ~/.config/neofetch
+  git add ~/.fzf.zsh ~/.p10k.zsh ~/.tmux.conf ~/.zshrc ~/README.md ~/.config/lazygit ~/.config/neofetch
+  git commit -m "$datetime"
+  git push -u origin main
+  cd ~/.config/nvim/
+  git add "."
+  git commit -m "$datetime"
+  git push -u origin main
+}
+
+git_commit_dot_files() {
+  cd ~/
+  local datetime=$(TZ="Pacific/Auckland" date +"%Y-%m-%d %H:%M:%S")
+  git add ~/.fzf.zsh ~/.p10k.zsh ~/.tmux.conf ~/.zshrc ~/README.md ~/.config/lazygit ~/.config/neofetch
+  git commit -m "$datetime"
+  git push -u origin main
+}
+
+git_commit_nvim() {
+  cd ~/.config/nvim/
+  local datetime=$(TZ="Pacific/Auckland" date +"%Y-%m-%d %H:%M:%S")
+  git add "."
   git commit -m "$datetime"
   git push -u origin main
 }
