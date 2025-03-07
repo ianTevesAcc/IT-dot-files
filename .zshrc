@@ -130,36 +130,34 @@ alias Tks="tmux kill-session -t"
 alias Thelp="bat /home/ian/.tmux/tmux-shortcuts.md"
 
 # Git add dot and conf files to repo
-alias Ga="git_commit_dot_and_conf_files"
+alias Ga="git_commit_dot_files; git_commit_nvim"
 alias Gz="git_commit_dot_files"
 alias Gn="git_commit_nvim"
-
-git_commit_dot_and_conf_files() {
-  cd ~/
-  local datetime=$(TZ="Pacific/Auckland" date +"%Y-%m-%d %H:%M:%S")
-  git add ~/.fzf.zsh ~/.p10k.zsh ~/.tmux.conf ~/.zshrc ~/README.md ~/.config/lazygit ~/.config/neofetch
-  git commit -m "$datetime"
-  git push -u origin main
-  cd ~/.config/nvim/
-  git add "."
-  git commit -m "$datetime"
-  git push -u origin main
-}
 
 git_commit_dot_files() {
   cd ~/
   local datetime=$(TZ="Pacific/Auckland" date +"%Y-%m-%d %H:%M:%S")
-  git add ~/.fzf.zsh ~/.p10k.zsh ~/.tmux.conf ~/.zshrc ~/README.md ~/.config/lazygit ~/.config/neofetch
+
+  # Commit and push dot files
+  git add ~/.fzf.zsh ~/.p10k.zsh ~/.tmux.conf ~/.zshrc ~/README.md ~/.config/lazygit/ ~/.config/neofetch/
   git commit -m "$datetime"
-  git push -u origin main
+  git push -u origin test && dot_push_status="success" || dot_push_status="failed"
+
+  # Print status
+  echo "Dot files git push: $dot_push_status"
 }
 
 git_commit_nvim() {
   cd ~/.config/nvim/
   local datetime=$(TZ="Pacific/Auckland" date +"%Y-%m-%d %H:%M:%S")
-  git add "."
+
+  # Commit and push nvim files
+  git add .
   git commit -m "$datetime"
-  git push -u origin main
+  git push -u origin main && nvim_push_status="success" || nvim_push_status="failed"
+
+  # Print status
+  echo "Nvim files git push: $nvim_push_status"
 }
 
 # Function for Ollama on port 11434
