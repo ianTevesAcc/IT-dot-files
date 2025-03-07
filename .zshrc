@@ -139,7 +139,7 @@ git_commit_dot_files() {
   local datetime=$(TZ="Pacific/Auckland" date +"%Y-%m-%d %H:%M:%S")
 
   # Commit and push dot files
-  git add ~/.fzf.zsh ~/.p10k.zsh ~/.tmux.conf ~/.zshrc ~/README.md ~/.config/lazygit/ ~/.config/neofetch/
+  git add ~/.fzf.zsh ~/.p10k.zsh ~/.tmux.conf ~/.zshrc ~/README.md ~/.tmux/ ~/.config/lazygit/ ~/.config/neofetch/
   git commit -m "$datetime"
   git push -u origin main && dot_push_status="success" || dot_push_status="failed"
 
