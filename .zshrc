@@ -144,7 +144,7 @@ git_commit_dot_files() {
   git push -u origin main && dot_push_status="success" || dot_push_status="failed"
 
   # Print status
-  echo "\n---\nDot files git push: $dot_push_status\n\n"
+  echo "\n---\nDot files git push: $dot_push_status\n---\n"
 }
 
 git_commit_nvim() {
@@ -157,7 +157,7 @@ git_commit_nvim() {
   git push -u origin main && nvim_push_status="success" || nvim_push_status="failed"
 
   # Print status
-  echo "\n---\nNvim files git push: $nvim_push_status\n\n"
+  echo "\n---\nNvim files git push: $nvim_push_status\n---\n"
 }
 
 # Function for Ollama on port 11434
