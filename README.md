@@ -17,7 +17,6 @@ cp selected-dot-file selected-directory
 ```
 Shortcuts:
 - You can view tmux shortcuts by running `Thelp`
-- You can view nvim shortcuts by running `NvCheatsheet` or by pressing `leader + ch`
 
 Required Plugins (install via `brew`):
 - neovim
