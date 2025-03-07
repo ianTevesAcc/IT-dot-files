@@ -1,3 +1,4 @@
+# IT dot files
 This is a repo full of my dot files. Copy all files into a folder then move them individually.
 
 ```terminal
@@ -14,7 +15,6 @@ mv selected-dot-file selected-directory
 # or copy them to their destination
 cp selected-dot-file selected-directory
 ```
-
 Shortcuts:
 - You can view tmux shortcuts by running `Thelp`
 - You can view nvim shortcuts by running `NvCheatsheet` or by pressing `leader + ch`
@@ -26,3 +26,7 @@ Required Plugins (install via `brew`):
 - neofetch
 - lazygit
 
+---
+
+# To Do
+- [ ] Test if git commit dot files and nvim files is working on .zshrc
