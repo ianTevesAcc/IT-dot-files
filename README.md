@@ -22,6 +22,7 @@ Required Plugins (install via `brew`):
 - neovim
 - tmux
 - bat
+- colorls
 - neofetch
 - lazygit
 
