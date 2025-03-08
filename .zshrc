@@ -184,6 +184,7 @@ git_commit_dot_files() {
 
   # Commit and push dot files
   git add ~/.fzf.zsh ~/.p10k.zsh ~/.tmux.conf ~/.zshrc ~/README.md ~/.tmux/ ~/.config/lazygit/ ~/.config/neofetch/
+  git submodule add https://github.com/ianTevesAcc/IT-nvim ~/.config/nvim/
   git commit -m "$datetime"
   git push -u origin main && dot_push_status="success" || dot_push_status="failed"
 
