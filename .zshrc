@@ -129,6 +129,17 @@ alias Tls="tmux list-sessions"
 alias Tks="tmux kill-session -t"
 alias Thelp="bat /home/ian/.tmux/tmux-shortcuts.md"
 
+# Open README.md in current dir
+alias RM='find_and_open_readme'
+
+find_and_open_readme() {
+  if [[ -f README.md ]]; then
+    nvim README.md
+  else
+    echo "README.md not found in the current directory."
+  fi
+}
+
 # Open nvim file
 alias N='nvim_open_file'
 
