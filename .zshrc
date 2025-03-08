@@ -25,6 +25,7 @@ export PATH="/home/ian/node_modules/.bin/neovim-node-host:$PATH"          # path
 export PATH="/snap/bin:$PATH"                                             # path to snap bin
 export PATH="/home/linuxbrew/.linuxbrew/lib/luarocks/:$PATH"              # path to luarocks
 export PATH="$HOME/.local/share/nvim/mason/bin/:$PATH"                    # path to mason bin
+export PATH="/home/ian/.local/bin:$PATH"                                  # path to .local/bin
 
 # Colour correct TERM - Check TERM color with `echo $TERM`
 # export TERM='xterm-256color'
@@ -102,8 +103,7 @@ alias R='reset'
 alias C='clear'
 alias E='exit'
 alias Ex='explorer.exe'
-alias N='nvim'
-alias Nn='nvim ~/.config/nvim/'
+alias Nn='N ~/.config/nvim/'
 alias Tz='nvim ~/.tmux.conf'
 alias Sz='source ~/.zshrc'
 alias Nz='nvim ~/.zshrc'
@@ -128,6 +128,39 @@ alias cover="clear && neofetch && pwd && colorls --dark"
 alias Tls="tmux list-sessions"
 alias Tks="tmux kill-session -t"
 alias Thelp="bat /home/ian/.tmux/tmux-shortcuts.md"
+
+# Open nvim file
+alias N='nvim_open_file'
+
+nvim_open_file() {
+  # Check if an argument is passed
+  if [ -z "$1" ]; then
+    echo "Usage: nvim_open_file <file_or_directory>"
+    return 1
+  fi
+
+  local target="$1"
+
+  # Check if the target is a file
+  if [ -f "$target" ]; then
+    nvim "$target"
+  elif [ -d "$target" ]; then
+    # Store the current directory
+    local prev_dir="$PWD"
+
+    # Change to the target directory
+    cd "$target" || return 1
+
+    # Open the directory in nvim
+    nvim
+
+    # Return to the previous directory after nvim exits
+    cd "$prev_dir" || return 1
+  else
+    echo "Error: '$target' is not a valid file or directory."
+    return 1
+  fi
+}
 
 # Git add dot and conf files to repo
 alias Ga="git_commit_dot_files; git_commit_nvim"
