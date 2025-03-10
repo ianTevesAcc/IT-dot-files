@@ -315,7 +315,7 @@ csa() {
 }
 
 # Alias to Directories
-alias OB="cs /mnt/d/PROBV"
+alias OB="cs /mnt/c/Users/iante/OneDrive/"
 
 # Options
 ZLE_RPROMPT_INDENT=0  # take off zsh line right prompt padding
