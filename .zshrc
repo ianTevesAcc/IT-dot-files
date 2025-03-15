@@ -146,7 +146,7 @@ alias N='nvim_open_file'
 nvim_open_file() {
   # Check if an argument is passed
   if [ -z "$1" ]; then
-    echo "Usage: nvim_open_file <file_or_directory>"
+    nvim
     return 1
   fi
 
