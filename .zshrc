@@ -49,7 +49,6 @@ for file in ~/.config/zsh/*.zsh; do
   source "$file"
 done
 
-
 # DEFAULT CONFIG & OPTIONS ---
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"

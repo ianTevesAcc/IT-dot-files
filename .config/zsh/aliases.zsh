@@ -25,15 +25,15 @@ alias Gn="git_commit_nvim"
 
 # Neovim and config-related aliases
 alias N='nvim_open_file'
-alias Nz='nvim ~/.zshrc'
+alias Nz='N ~/.zshrc'
 alias Sz='source ~/.zshrc'
-alias Tz='nvim ~/.tmux.conf'
+alias Tz='N ~/.tmux.conf'
 alias Nn='N ~/.config/nvim/'
 
 # File search and preview aliases
 alias F='fzf'
 alias Fc='fzf --preview="bat --color=always {}"'
-alias Nfc='nvim $(fzf -m --preview="bat --color=always {}")'
+alias Nfc='N $(fzf -m --preview="bat --color=always {}")'
 
 # Terminal utilities
 alias neofetch="neofetch --ascii /home/ian/.config/neofetch/anime-logo.txt"
