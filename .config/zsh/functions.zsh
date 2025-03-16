@@ -31,19 +31,23 @@ nvim_open_file() {
   fi
 
   local target="$1"
+  local prev_dir="$PWD"
 
   if [ -f "$target" ]; then
+    local dir_path="${target:h}"
+    cd "$dir_path" || return 1
     nvim "$target"
+    cd "$prev_dir" || return 1
   elif [ -d "$target" ]; then
-    local prev_dir="$PWD"
     cd "$target" || return 1
     nvim
     cd "$prev_dir" || return 1
   else
-    echo "Error: '$target' is not a valid file or directory."
+    echo "Error: "$target" is not a valid file or directory."
     return 1
   fi
 }
+
 
 # Git Commit Dot Files
 git_commit_dot_files() {
@@ -66,27 +70,32 @@ git_commit_nvim() {
 
 # C++ Project Setup Function
 cpp_setup() {
-  project_name=$(echo "$1" | tr ' ' '-')
+  project_name=$(echo "$1" | tr " " "-")
 
   mkdir -p "$project_name"/{src,include,build}
   touch "$project_name"/CMakeLists.txt "$project_name"/src/main.cpp "$project_name"/include/app.h
 
-  echo '#include <iostream>
+  # Corrected main.cpp with proper string formatting
+  echo "#include <iostream>
   int main() {
-  std::cout << "Hello, World!" << std::endl;
+  std::cout << \"Hello, World!\" << std::endl;
   return 0;
-}' > "$project_name/src/main.cpp"
+}" > "$project_name/src/main.cpp"
 
-echo 'cmake_minimum_required(VERSION 3.10)
-project(MyProject)
-set(CMAKE_CXX_STANDARD 17)
-add_executable(my_project src/main.cpp)' > "$project_name/CMakeLists.txt"
+  # Corrected CMakeLists.txt
+  echo "cmake_minimum_required(VERSION 3.10)
+  project(MyProject)
+  set(CMAKE_CXX_STANDARD 17)
+  add_executable(my_project src/main.cpp)" > "$project_name/CMakeLists.txt"
 
-cd "$project_name/build" || return
-cmake ..
-make
-cd ../..
+  # Build the project
+  cd "$project_name/build" || return
+  cmake ..
+  make
+  cd ..
+  lc
 }
+
 
 # Ollama on port 11434
 ollama_11434() {
@@ -113,7 +122,7 @@ if [[ -n "$model" ]]; then
   echo "Running Ollama model: $model"
   ollama run "$model"
 else
-  echo "Error: AI model '$1' not found. Available models: ${(@k)ai_models}" >&2
+  echo "Error: AI model "$1" not found. Available models: ${(@k)ai_models}" >&2
 fi
 }
 
