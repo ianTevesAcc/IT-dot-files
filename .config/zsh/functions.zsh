@@ -1,24 +1,20 @@
-# ----------------------------------------------
-# FUNCTIONS FILE (~/.config/zsh/functions.zsh)
-# ----------------------------------------------
-
-# Unalias `cs` to avoid conflicts
-unalias cs 2>/dev/null
+# ------------------
+# FUNCTIONS ZSH FILE
+# ------------------
 
 # Function to change directory and display contents
+unalias cs 2>/dev/null  # Unalias `cs` to avoid conflicts
 cs() {
   cd "$@" && clear && pwd && colorls --dark
 }
 
-# Unalias `csa` to avoid conflicts
-unalias csa 2>/dev/null
-
 # Function to change directory (including hidden files) and display contents
+unalias csa 2>/dev/null  # Unalias `csa` to avoid conflicts
 csa() {
   cd "$@" && clear && pwd && colorls -a --dark
 }
 
-# 🔹 Find and Open README.md
+# Find and Open README.md
 find_and_open_readme() {
   if [[ -f README.md ]]; then
     nvim README.md
@@ -27,7 +23,7 @@ find_and_open_readme() {
   fi
 }
 
-# 🔹 Open Neovim with File or Directory
+# Open Neovim with File or Directory
 nvim_open_file() {
   if [ -z "$1" ]; then
     nvim
@@ -49,7 +45,7 @@ nvim_open_file() {
   fi
 }
 
-# 🔹 Git Commit Dot Files
+# Git Commit Dot Files
 git_commit_dot_files() {
   cd ~/
   local datetime=$(TZ="Pacific/Auckland" date +"%Y-%m-%d %H:%M:%S")
@@ -59,7 +55,7 @@ git_commit_dot_files() {
   git push -u origin main && echo "\n---\nDot files git push: success\n---\n" || echo "\n---\nDot files git push: failed\n---\n"
 }
 
-# 🔹 Git Commit Nvim Config
+# Git Commit Nvim Config
 git_commit_nvim() {
   cd ~/.config/nvim/
   local datetime=$(TZ="Pacific/Auckland" date +"%Y-%m-%d %H:%M:%S")
@@ -68,7 +64,7 @@ git_commit_nvim() {
   git push -u origin main && echo "\n---\nNvim files git push: success\n---\n" || echo "\n---\nNvim files git push: failed\n---\n"
 }
 
-# 🔹 C++ Project Setup Function
+# C++ Project Setup Function
 cpp_setup() {
   project_name=$(echo "$1" | tr ' ' '-')
 
@@ -90,4 +86,79 @@ cd "$project_name/build" || return
 cmake ..
 make
 cd ../..
+}
+
+# Ollama on port 11434
+ollama_11434() {
+  OLLAMA_HOST=127.0.0.1:11434 ollama "$@"
+}
+
+# Ollama on port 11435
+ollama_11435() {
+  OLLAMA_HOST=127.0.0.1:11435 ollama "$@"
+}
+
+# Ollama Model Selection
+ollama_run() {
+  declare -A ai_models=(
+  [deepseek]="deepseek-r1:1.5b"
+  [qwen]="qwen:1.8b"
+  [llama]="llama3.2:1b"
+  [nsfw]="NSFW-3B"
+)
+
+model=${ai_models[$1]}
+
+if [[ -n "$model" ]]; then
+  echo "Running Ollama model: $model"
+  ollama run "$model"
+else
+  echo "Error: AI model '$1' not found. Available models: ${(@k)ai_models}" >&2
+fi
+}
+
+# Pandoc Convert Function
+pandoc_convert() {
+  if [[ $# -lt 2 ]]; then
+    echo "Usage: pandoc_convert <input_file> <output_format> [extra_options]"
+    return 1
+  fi
+
+  INPUT_FILE="$1"
+  OUTPUT_FORMAT="$2"
+  EXTRA_OPTIONS="$3"
+
+  BASENAME="${INPUT_FILE%.*}"
+  OUTPUT_FILE="${BASENAME}.${OUTPUT_FORMAT}"
+
+  echo "Converting \"$INPUT_FILE\" to \"$OUTPUT_FILE\" ..."
+  pandoc "$INPUT_FILE" -o "$OUTPUT_FILE" $EXTRA_OPTIONS
+
+  if [[ $? -eq 0 ]]; then
+    echo "✅ Conversion successful: \"$OUTPUT_FILE\""
+  else
+    echo "❌ Conversion failed."
+  fi
+}
+
+# Special Pandoc Conversion (DOCX to Markdown with Grid Tables)
+pandoc_special() {
+  if [[ $# -lt 2 ]]; then
+    echo "Usage: pandoc_special <input_file> <output_format>"
+    return 1
+  fi
+
+  INPUT_FILE="$1"
+  OUTPUT_FORMAT="$2"
+  BASENAME="${INPUT_FILE%.*}"
+  OUTPUT_FILE="${BASENAME}.${OUTPUT_FORMAT}"
+
+  echo "Converting \"$INPUT_FILE\" to \"$OUTPUT_FILE\" with special settings..."
+  pandoc "$INPUT_FILE" -o "$OUTPUT_FILE" --from=docx --to=markdown-grid_tables
+
+  if [[ $? -eq 0 ]]; then
+    echo "✅ Conversion successful: \"$OUTPUT_FILE\""
+  else
+    echo "❌ Conversion failed."
+  fi
 }

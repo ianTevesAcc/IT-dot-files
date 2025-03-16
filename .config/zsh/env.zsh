@@ -1,26 +1,33 @@
-# ----------------------------------------------
-# ENVIRONMENT VARIABLES FILE (~/.config/zsh/env.zsh)
-# ----------------------------------------------
+# ------------------------------
+# ENVIRONMENT VARIABLES ZSH FILE
+# ------------------------------
 
-# 🔹 PATH Configurations
-export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
-export PATH="/home/linuxbrew/.linuxbrew/sbin:$PATH"
+# System paths
+export PATH="/usr/bin:$PATH"
 export PATH="/usr/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/.config/nvim/:$PATH"
+export PATH="/snap/bin:$PATH"
 
-# 🔹 Ruby & Node.js Paths
+# Homebrew paths
+export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+export PATH="/home/linuxbrew/.linuxbrew/sbin:$PATH"
+export PATH="/home/linuxbrew/.linuxbrew/share/emacs/site-lisp/ruby:$PATH"
+export PATH="/home/linuxbrew/.linuxbrew/lib/ruby/gems/3.3.0/bin:$PATH"
+export PATH="/home/linuxbrew/.linuxbrew/lib/luarocks/:$PATH"
+
+# rbenv paths
 export RBENV_ROOT="$HOME/.rbenv"
 export PATH="$RBENV_ROOT/shims:/versions:$PATH"
-export PATH="/home/linuxbrew/.linuxbrew/lib/ruby/gems/3.3.0/bin:$PATH"
-export PATH="/home/ian/node_modules/.bin:$PATH"
 
-# 🔹 Terminal Settings
-export GTK_IM_MODULE=xim
-export QT_IM_MODULE=xim
-export XMODIFIERS=@im=ibus
+# Node & npm paths
+export PATH="/home/ian/node_modules/.bin:$PATH"
+export PATH="/home/ian/node_modules/.bin/neovim-node-host:$PATH"
+
+# User paths
+export PATH="$HOME/.local/share/nvim/mason/bin/:$PATH"
+export PATH="/home/ian/.local/bin:$PATH"
+
 
 # 🔹 Editor & Terminal Settings
 # export TERM='xterm-256color'
