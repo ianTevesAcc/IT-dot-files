@@ -23,30 +23,32 @@ find_and_open_readme() {
   fi
 }
 
-# Open Neovim with File or Directory
 nvim_open_file() {
   if [ -z "$1" ]; then
     nvim
-    return 1
+    return
   fi
 
   local target="$1"
+  local dir_path
   local prev_dir="$PWD"
 
   if [ -f "$target" ]; then
-    local dir_path="${target:h}"
-    cd "$dir_path" || return 1
+    # If it's a file, open it
     nvim "$target"
-    cd "$prev_dir" || return 1
   elif [ -d "$target" ]; then
+    # If it's a directory, open Neovim in that directory
     cd "$target" || return 1
     nvim
     cd "$prev_dir" || return 1
   else
-    echo "Error: "$target" is not a valid file or directory."
-    return 1
+    # Assume it's a file path, ensure parent directories exist but don't create the file
+    dir_path=$(dirname "$target")
+    mkdir -p "$dir_path" # Create only the parent directories if needed
+    nvim "$target"
   fi
 }
+
 
 
 # Git Commit Dot Files
