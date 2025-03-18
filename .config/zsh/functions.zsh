@@ -78,8 +78,7 @@ cpp_setup() {
   touch "$project_name"/CMakeLists.txt "$project_name"/src/main.cpp "$project_name"/include/app.h
 
   # Corrected main.cpp with proper string formatting
-  echo "#include <iostream>
-  int main() {
+  echo "#include <iostream>\n\nint main() {
   std::cout << \"Hello, World!\" << std::endl;
   return 0;
 }" > "$project_name/src/main.cpp"

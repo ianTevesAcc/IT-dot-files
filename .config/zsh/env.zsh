@@ -30,6 +30,7 @@ export PATH="/home/ian/.local/bin:$PATH"
 
 # Browser Redirect to Windows Broswer
 export BROWSER='/mnt/c/Windows/System32/cmd.exe /c start'
+export YOYO='hahahahah'
 
 # 🔹 Editor & Terminal Settings
 # export TERM='xterm-256color'
