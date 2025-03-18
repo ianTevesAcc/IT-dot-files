@@ -38,6 +38,7 @@ alias Nfc='N $(fzf -m --preview "bat --color=always {}")'
 
 # Terminal utilities
 alias neofetch="neofetch --ascii /home/ian/.config/neofetch/anime-logo.txt"
+alias savepkgs="save_installed_packages"
 
 # Tmux aliases
 alias Tls="tmux list-sessions"

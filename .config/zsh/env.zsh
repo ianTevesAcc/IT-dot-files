@@ -28,6 +28,8 @@ export PATH="/home/ian/node_modules/.bin/neovim-node-host:$PATH"
 export PATH="$HOME/.local/share/nvim/mason/bin/:$PATH"
 export PATH="/home/ian/.local/bin:$PATH"
 
+# Browser Redirect to Windows Broswer
+export BROWSER='/mnt/c/Windows/System32/cmd.exe /c start'
 
 # 🔹 Editor & Terminal Settings
 # export TERM='xterm-256color'

@@ -173,3 +173,17 @@ pandoc_special() {
     echo "❌ Conversion failed."
   fi
 }
+
+# Create a list of packages installed by brew, snap, and apt
+save_installed_packages() {
+  echo "Saving Homebrew packages..."
+  brew list > ~/brew.txt
+
+  echo "Saving APT packages..."
+  dpkg --get-selections | awk '{print $1}' > ~/sudo_apt.txt
+
+  echo "Saving Snap packages..."
+  snap list > ~/sudo_snap.txt
+
+  echo "Package lists saved to ~/brew.txt, ~/sudo_apt.txt, and ~/sudo_snap.txt."
+}

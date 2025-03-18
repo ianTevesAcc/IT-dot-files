@@ -48,6 +48,9 @@ zinit snippet OMZP::command-not-found
 for file in ~/.config/zsh/*.zsh; do
   source "$file"
 done
+for file in ~/.config/zsh/SECRETS/*.zsh; do
+  source "$file"
+done
 
 # DEFAULT CONFIG & OPTIONS ---
 # Path to your Oh My Zsh installation.
