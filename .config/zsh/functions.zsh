@@ -55,7 +55,7 @@ nvim_open_file() {
 git_commit_dot_files() {
   cd ~/
   local datetime=$(TZ="Pacific/Auckland" date +"%Y-%m-%d %H:%M:%S")
-  git add ~/.fzf.zsh ~/.p10k.zsh ~/.tmux.conf ~/.zshrc ~/README.md ~/.tmux/ ~/.config/zsh/ ~/.config/lazygit/ ~/.config/neofetch/
+  git add ~/.fzf.zsh ~/.p10k.zsh ~/.tmux.conf ~/.zshrc ~/README.md ~/.tmux/ ~/.config/zsh/ ~/.config/lazygit/ ~/.config/neofetch/ ~/.config/installed_pkgs/
   git submodule add https://github.com/ianTevesAcc/IT-nvim ~/.config/nvim/
   git commit -m "$datetime"
   git push -u origin main && echo "\n---\nDot files git push: success\n---\n" || echo "\n---\nDot files git push: failed\n---\n"
@@ -177,13 +177,13 @@ pandoc_special() {
 # Create a list of packages installed by brew, snap, and apt
 save_installed_packages() {
   echo "Saving Homebrew packages..."
-  brew list > ~/brew.txt
+  brew list > ~/.config/installed_pkgs/brew.txt
 
   echo "Saving APT packages..."
-  dpkg --get-selections | awk '{print $1}' > ~/sudo_apt.txt
+  dpkg --get-selections | awk '{print $1}' > ~/.config/installed_pkgs/sudo_apt.txt
 
   echo "Saving Snap packages..."
-  snap list > ~/sudo_snap.txt
+  snap list > ~/.config/installed_pkgs/sudo_snap.txt
 
-  echo "Package lists saved to ~/brew.txt, ~/sudo_apt.txt, and ~/sudo_snap.txt."
+  echo "Package lists saved to ~/.config/installed_pkgs/"
 }

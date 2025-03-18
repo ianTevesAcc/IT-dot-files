@@ -1,0 +1,8 @@
+Name               Version          Rev    Tracking       Publisher       Notes
+bare               1.0              5      latest/stable  canonical**     base
+chromium           134.0.6998.35    3060   latest/stable  canonical**     -
+core22             20250110         1748   latest/stable  canonical**     base
+cups               2.4.11-3         1070   latest/stable  openprinting**  -
+gnome-42-2204      0+git.38ea591    202    latest/stable  canonical**     -
+gtk-common-themes  0.1-81-g442e511  1535   latest/stable  canonical**     -
+snapd              2.67.1           23771  latest/stable  canonical**     snapd
