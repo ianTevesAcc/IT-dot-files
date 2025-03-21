@@ -108,22 +108,76 @@ ollama_11435() {
   OLLAMA_HOST=127.0.0.1:11435 ollama "$@"
 }
 
-# Ollama Model Selection
-ollama_run() {
+# AI Model Selection
+AI_model_run() {
   declare -A ai_models=(
   [deepseek]="deepseek-r1:1.5b"
   [qwen]="qwen:1.8b"
   [llama]="llama3.2:1b"
   [nsfw]="NSFW-3B"
+  [gpt]="shellgpt"  # Special case for ShellGPT chat
 )
 
 model=${ai_models[$1]}
 
-if [[ -n "$model" ]]; then
-  echo "Running Ollama model: $model"
-  ollama run "$model"
-else
-  echo "Error: AI model "$1" not found. Available models: ${(@k)ai_models}" >&2
+if [[ "$model" == "shellgpt" ]]; then
+  echo -e "\nWelcome to ShellGPT Interactive Mode!\n"
+  echo -e "Type your message or use /? for help.\n"
+
+  while true; do
+    # Prompt for user input
+    echo -ne ">>> "
+
+            # Read user input
+            if [[ -n "$ZSH_VERSION" ]]; then
+              read -r input || break
+            else
+              IFS= read -re input || break
+            fi
+
+            # Exit commands
+            if [[ "$input" == "/bye" || "$input" == "exit" ]]; then
+              echo -e "\nGoodbye!\n"
+              break
+            fi
+
+            # Help command
+            if [[ "$input" == "/?" || "$input" == "/help" ]]; then
+              echo -e "\nAvailable Commands:"
+              echo "  /bye            Exit chat"
+              echo "  /?              Show this help menu"
+              echo '  """             Start multi-line message (end with """)'
+              echo ""
+              continue
+            fi
+
+            # Multi-line message handling
+            if [[ "$input" == '"""' ]]; then
+              input=""
+              echo -e "\e[90m[Multi-line mode enabled. Type \"\"\" to send.]\e[0m"
+
+              while IFS= read -r line; do
+                [[ "$line" == '"""' ]] && break
+                input+="$line"$'\n'
+              done
+
+              echo -e "[Message sent]\n"
+            fi
+
+            # Send input to ShellGPT and format output
+            if [[ -n "$input" ]]; then
+              response=$(sgpt --chat temp "$input")
+              echo -e "$response\n"
+            fi
+          done
+
+          echo -e "Goodbye!\n"
+
+        elif [[ -n "$model" ]]; then
+          echo "Running Ollama model: $model"
+          ollama run "$model"
+        else
+          echo "Error: AI model '$1' not found. Available models: ${!ai_models[@]}" >&2
 fi
 }
 

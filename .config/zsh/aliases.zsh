@@ -51,7 +51,7 @@ alias Ahelp="bat ~/.config/zsh/aliases.zsh"
 # Ollama AI aliases
 alias AI1="ollama_11434"
 alias AI2="ollama_11435"
-alias AI="ollama_run"
+alias AI="AI_model_run"
 
 # Windows-related alias
 alias Ex="explorer.exe"
