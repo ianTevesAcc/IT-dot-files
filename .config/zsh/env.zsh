@@ -32,6 +32,9 @@ export PATH="/home/ian/.local/bin:$PATH"
 export BROWSER='/mnt/c/Windows/System32/cmd.exe /c start'
 export YOYO='hahahahah'
 
+# SumatraPDF path
+export PATH="/mnt/c/Users/iante/AppData/Local/SumatraPDF/:$PATH"
+
 # 🔹 Editor & Terminal Settings
 # export TERM='xterm-256color'
 # export EDITOR='nvim'

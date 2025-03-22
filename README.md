@@ -29,4 +29,5 @@ Required Plugins (install via `brew`):
 ---
 
 # To Do
-- [ ] Test if git commit dot files and nvim files is working on .zshrc
+- [x] Test if git commit dot files and nvim files is working on .zshrc
+- [ ] Add a way to close current tmux window and close term window at the same time when `Q` is pressed in tmux command mode `<C-s>Q`
